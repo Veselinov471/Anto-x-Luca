@@ -1,0 +1,260 @@
+{
+  "meta": {
+    "title": "Anto x Luca — Italian women's handbags",
+    "description": "A small selection of handbags made in Italy. Clear prices and early access for Bulgaria.",
+    "ogDescription": "Italian elegance for every day. Join early access."
+  },
+  "nav": {
+    "earlyAccess": "Early access",
+    "privacy": "Privacy",
+    "cookies": "Cookies",
+    "faq": "FAQ",
+    "languageBg": "BG",
+    "languageEn": "EN",
+    "switchLanguage": "Language"
+  },
+  "hero": {
+    "eyebrow": "Made in Italy",
+    "title": "Italian elegance for every day.",
+    "subtitle": "A small selection of handbags with clear prices. Join first — before the official launch.",
+    "ctaBrowse": "Browse the collection",
+    "ctaWaitlist": "Get early access",
+    "slideshowLabel": "Handbag gallery",
+    "goToSlide": "Show image {index}"
+  },
+  "collection": {
+    "eyebrow": "The collection",
+    "title": "Six models. No noise.",
+    "subtitle": "A small selection, each in several colours. Prices are clear. Choose the one you want to see first.",
+    "madeInItaly": "Made in Italy",
+    "cta": "Get early access",
+    "colorsLabel": "Colours"
+  },
+  "whyItaly": {
+    "eyebrow": "Origin",
+    "title": "Why Italy matters.",
+    "p1": "We work directly with an Italian maker. We want craftsmanship you can feel in the stitching, the weight of the hardware, and how the bag holds its shape over time — not just a “Made in Italy” label on someone else’s story.",
+    "p2": "We will share materials and construction with concrete facts once they are finalized with the manufacturer. Until then, we promise only what we can stand behind.",
+    "li1": "Origin: Italy",
+    "li2": "Approach: a small, carefully chosen selection",
+    "li3": "Promise: clear facts instead of loud superlatives"
+  },
+  "details": {
+    "eyebrow": "Details",
+    "title": "What you know today.",
+    "subtitle": "Full specifications will be published before orders open. Until then — silhouette, purpose, and price, with no invented specs.",
+    "material": "Material",
+    "dimensions": "Dimensions",
+    "intendedUse": "Best for",
+    "origin": "Origin",
+    "originValue": "Made in Italy"
+  },
+  "lifestyle": {
+    "eyebrow": "In the rhythm of the day",
+    "title": "For your life — not only the display window.",
+    "subtitle": "Soon you will see the bags in real situations. While we prepare our own photography, we make it clear these are temporary visuals — no stock photos presented as ours.",
+    "soon": "Real photos coming soon",
+    "office": "Office",
+    "officeHint": "For the workday",
+    "city": "City",
+    "cityHint": "For moving through town",
+    "weekend": "Weekend",
+    "weekendHint": "For freer days"
+  },
+  "trust": {
+    "eyebrow": "Trust",
+    "title": "A new brand. Clear rules.",
+    "items": {
+      "italy": {
+        "title": "Made in Italy",
+        "body": "Origin is part of the promise — described with facts, not slogans."
+      },
+      "support": {
+        "title": "Support in your language",
+        "body": "Customer communication for shoppers in Bulgaria. Contact details will be completed before the campaign."
+      },
+      "price": {
+        "title": "Prices without masks",
+        "body": "Prices are shown in euro. What you see here is the price we are talking about."
+      },
+      "policies": {
+        "title": "Honest policies",
+        "body": "Shipping, returns, and payment — published before sales. No fake reviews and no artificial scarcity."
+      }
+    }
+  },
+  "faq": {
+    "eyebrow": "Questions & answers",
+    "title": "Before you join",
+    "items": {
+      "origin": {
+        "q": "Where are the bags made?",
+        "a": "In Italy, with our manufacturing partner. Once we finalize the public details about the atelier and region, we will publish them here — clearly and without embellishment."
+      },
+      "materials": {
+        "q": "What are they made of?",
+        "a": "For each model we will describe the material, lining, and hardware once we have final confirmation. We prefer to wait for the facts rather than promise “premium leather” on guesswork."
+      },
+      "delivery": {
+        "q": "How long does delivery take?",
+        "a": "Delivery times for Bulgaria will be announced before the first orders. Right now we are collecting interest for early access — with no payment."
+      },
+      "deliveryCost": {
+        "q": "How much is shipping?",
+        "a": "We will state it clearly at checkout, together with the terms. We work with logistics for Bulgaria and will not hide fees in fine print."
+      },
+      "returns": {
+        "q": "Can I return the bag?",
+        "a": "Yes — before sales begin we will publish a full returns policy aligned with your consumer rights. It will be readable, not buried in terms and conditions."
+      },
+      "damage": {
+        "q": "What if the parcel arrives damaged?",
+        "a": "You will have a clear way to contact us and request a replacement or return. Exact steps will be described in the terms before launch."
+      },
+      "contact": {
+        "q": "How can I reach you?",
+        "a": "Write to the email at the bottom of the page. Phone and company details will be added before the ad campaign so they are accurate and current."
+      },
+      "payment": {
+        "q": "How do I pay?",
+        "a": "You don’t — not yet. This is an early-access signup. Payment methods will be announced when we open orders."
+      },
+      "currency": {
+        "q": "Are prices in euro or leva?",
+        "a": "Prices on the site are in euro (EUR)."
+      },
+      "fees": {
+        "q": "Are there hidden fees?",
+        "a": "Not in the advertising and not in how the price is presented. At purchase you will see the product, shipping, and applicable taxes in one place."
+      },
+      "difference": {
+        "q": "How do the models differ?",
+        "a": "By silhouette and how you carry them: from a compact city bag to a medium work-and-city shape and a more structured classic. Full dimensions and details will be filled in before launch — for now, choose the one that draws you most."
+      }
+    }
+  },
+  "waitlist": {
+    "eyebrow": "Early access",
+    "title": "Be among the first.",
+    "subtitle": "No payment now. Tell us which model you like — and we will notify you when orders open. The first 20 preorders get 20% off.",
+    "firstName": "Name (optional)",
+    "email": "Email *",
+    "product": "The model you like *",
+    "productPlaceholder": "Choose a model",
+    "consent": "I agree to receive early-access updates and news from Anto x Luca. I can unsubscribe at any time. See the",
+    "privacyLink": "Privacy Policy",
+    "submit": "Get early access",
+    "submitting": "Saving…",
+    "successTitle": "You’re on the list.",
+    "successBody": "We’ll email you when early access opens. If you’re among the first 20 to preorder, your 20% off is waiting. Every message will include an unsubscribe link.",
+    "errorGeneric": "We couldn’t sign you up. Please try again.",
+    "errorUnexpected": "Something went wrong. Please try again in a moment.",
+    "modalTitle": "Early access for this model",
+    "modalSubtitle": "No payment now — just a signup. First 20 preorders: 20% off.",
+    "modalClose": "Close",
+    "offerAria": "Early preorder offer",
+    "offerPercent": "−20%",
+    "offerHeadline": "for the first 20 preorders",
+    "offerBody": "Join the list now. The first 20 who place a preorder get 20% off when orders open."
+  },
+  "footer": {
+    "tagline": "Women’s handbags made in Italy. For women in Bulgaria who want clean style without the noise.",
+    "emailLabel": "Email:",
+    "companyNote": "Company details and phone will be added before sales begin."
+  },
+  "consent": {
+    "aria": "Cookie settings",
+    "body": "We use necessary cookies for the site to work. Analytics and marketing cookies (Google Analytics and Meta Pixel) load only if you agree.",
+    "policy": "Cookie Policy",
+    "necessary": "Necessary only",
+    "acceptAll": "Accept all"
+  },
+  "privacy": {
+    "eyebrow": "Draft — pending legal review",
+    "title": "Privacy Policy",
+    "banner": "This text is provisional and will be replaced after review by a Bulgaria / EU legal professional. It is not a final legal document.",
+    "p1": "Anto x Luca collects an email address, optional name, and preferred model to provide early access and related messages — only with your consent.",
+    "p2": "We process only what is necessary. After legal editing, this page will include: the data controller, legal basis, retention periods, your rights, and how to submit a GDPR request.",
+    "p3": "You can unsubscribe from marketing messages at any time via the link in the email once we start sending them.",
+    "back": "Back to home"
+  },
+  "cookies": {
+    "eyebrow": "Draft — pending legal review",
+    "title": "Cookie Policy",
+    "banner": "Provisional text. The final version will be completed with a legal professional.",
+    "necessary": "Necessary:",
+    "necessaryBody": "required for basic site functionality and remembering your consent choice.",
+    "analytics": "Analytics:",
+    "analyticsBody": "Google Analytics 4 — only if you agree.",
+    "marketing": "Marketing:",
+    "marketingBody": "Meta Pixel — only if you agree, for measuring and improving ads.",
+    "back": "Back to home"
+  },
+  "colors": {
+    "azzurro": "Light blue",
+    "bianco": "White",
+    "cuoio": "Cognac",
+    "nudo": "Nude",
+    "panna": "Cream",
+    "rosa": "Pink",
+    "rosso": "Red",
+    "verde_salvia": "Sage",
+    "giallo": "Yellow",
+    "tortora": "Taupe",
+    "verde_menta": "Mint",
+    "testa_di_moro": "Dark brown",
+    "verde": "Green",
+    "nero": "Black",
+    "bordeaux": "Bordeaux",
+    "verde_oliva": "Olive",
+    "burro": "Butter",
+    "cipria": "Powder",
+    "blu_notte": "Night blue",
+    "senape": "Mustard",
+    "argento": "Silver"
+  },
+  "products": {
+    "PRODUCT_01": {
+      "name": "Serena",
+      "shortDescription": "A roomy trapeze tote with two gold locks — enough for the day, still light in the hand.",
+      "material": "Genuine leather",
+      "dimensions": "32 × 21 × 19 cm",
+      "intendedUse": "Everyday city wear"
+    },
+    "PRODUCT_02": {
+      "name": "Melody",
+      "shortDescription": "A flat shoulder bag with a curved flap and a quiet gold lock — easy across the body.",
+      "material": "Genuine leather",
+      "dimensions": "28 × 17 × 9 cm",
+      "intendedUse": "Day to evening"
+    },
+    "PRODUCT_03": {
+      "name": "Federica",
+      "shortDescription": "Soft suede with a drawstring and a leather flap — relaxed, and still finished.",
+      "material": "Genuine suede",
+      "dimensions": "30 × 18 × 11 cm",
+      "intendedUse": "Everyday"
+    },
+    "PRODUCT_04": {
+      "name": "Conny",
+      "shortDescription": "A small box bag with a knotted handle — compact, with a clear shape.",
+      "material": "Genuine leather",
+      "dimensions": "22 × 12 × 11 cm",
+      "intendedUse": "City and evening"
+    },
+    "PRODUCT_05": {
+      "name": "Elisa",
+      "shortDescription": "A small baguette with a bamboo clasp and a thin strap — for the essentials, nothing more.",
+      "material": "Genuine leather",
+      "dimensions": "Dimensions will be confirmed",
+      "intendedUse": "Day and evening"
+    },
+    "PRODUCT_06": {
+      "name": "Bianca",
+      "shortDescription": "A structured top-handle with a bamboo clasp and a gold chain — finished, without extra shine.",
+      "material": "Genuine leather",
+      "dimensions": "Dimensions will be confirmed",
+      "intendedUse": "Everyday elegance"
+    }
+  }
+}

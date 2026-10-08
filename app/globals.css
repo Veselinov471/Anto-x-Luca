@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #f3f1ec;
+  --bg-elevated: #faf8f5;
+  --ink: #1a1714;
+  --ink-muted: #5c564e;
+  --line: #d9d2c8;
+  --accent: #6b2d3c;
+  --accent-soft: #8a4454;
+  --hero-overlay: rgba(18, 14, 12, 0.42);
+  --focus: #6b2d3c;
+  --success: #2f5d4a;
+  --error: #8b2e2e;
+  --radius: 2px;
+  --shadow-soft: 0 18px 50px rgba(26, 23, 20, 0.08);
+  --section-y: clamp(3.25rem, 8vw, 7rem);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 28%, white);
+  color: var(--ink);
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.section-pad {
+  padding-inline: max(1rem, env(safe-area-inset-left, 0px))
+    max(1rem, env(safe-area-inset-right, 0px));
+}
+
+@media (min-width: 480px) {
+  .section-pad {
+    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+  }
+}
+
+.section-y {
+  padding-block: var(--section-y);
+}
+
+.reveal {
+  animation: rise 0.8s ease both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.7s ease both;
+}
+
+.hero-kenburns {
+  animation: kenburns 18s ease-in-out infinite alternate;
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+/* Horizontal snap rows (mobile lifestyle) */
+.snap-x-row {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 0.25rem;
+}
+
+.snap-x-row::-webkit-scrollbar {
+  display: none;
+}
+
+.snap-x-item {
+  flex: 0 0 min(78vw, 18rem);
+  scroll-snap-align: start;
+}
+
+@media (min-width: 768px) {
+  .snap-x-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: visible;
+    scroll-snap-type: none;
+    gap: 1rem;
+    padding-bottom: 0;
+  }
+
+  .snap-x-item {
+    flex: none;
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .fade-in,
+  .hero-kenburns {
+    animation: none;
+  }
+}
