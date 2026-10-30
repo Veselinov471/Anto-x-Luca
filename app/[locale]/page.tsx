@@ -2,10 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Hero } from "@/components/Hero";
 import { ProductCollection } from "@/components/ProductCollection";
 import { WhyItaly } from "@/components/WhyItaly";
-import { ProductDetails } from "@/components/ProductDetails";
-import { Lifestyle } from "@/components/Lifestyle";
 import { Trust } from "@/components/Trust";
-import { Faq } from "@/components/Faq";
 import { FinalCta } from "@/components/FinalCta";
 import { SiteFooter } from "@/components/SiteFooter";
 import { JsonLd } from "@/components/JsonLd";
@@ -26,7 +23,7 @@ export default async function HomePage({
   const organization = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Anto x Luca",
+    name: "Italian Touch",
     url: siteUrl,
     description:
       locale === "bg"
@@ -46,7 +43,7 @@ export default async function HomePage({
           "@type": "Product",
           name: tp(`${p.id}.name`),
           description: tp(`${p.id}.shortDescription`),
-          brand: { "@type": "Brand", name: "Anto x Luca" },
+          brand: { "@type": "Brand", name: "Italian Touch" },
           offers: {
             "@type": "Offer",
             priceCurrency: "EUR",
@@ -67,10 +64,7 @@ export default async function HomePage({
         <Hero />
         <ProductCollection />
         <WhyItaly />
-        <ProductDetails />
-        <Lifestyle />
         <Trust />
-        <Faq />
         <FinalCta />
       </main>
       <SiteFooter />

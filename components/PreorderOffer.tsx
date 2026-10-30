@@ -14,7 +14,7 @@ export function PreorderOffer({ prominent = false }: Props) {
     <aside
       className={`relative overflow-hidden border border-[var(--accent)]/25 ${
         prominent
-          ? "bg-[color-mix(in_srgb,var(--accent)_9%,var(--bg-elevated))] px-4 py-4 sm:px-5 sm:py-5"
+          ? "bg-[color-mix(in_srgb,var(--accent)_9%,var(--bg-elevated))] px-3 py-3 sm:px-5 sm:py-5"
           : "bg-[color-mix(in_srgb,var(--accent)_7%,var(--bg))] px-4 py-3.5 sm:px-5 sm:py-4"
       }`}
       aria-label={t("offerAria")}
@@ -27,16 +27,24 @@ export function PreorderOffer({ prominent = false }: Props) {
         <p
           className={`font-display leading-none tracking-tight text-[var(--accent)] ${
             prominent
-              ? "text-[clamp(2.4rem,8vw,3.25rem)]"
+              ? "text-[clamp(2rem,7vw,3.25rem)]"
               : "text-[clamp(2rem,6vw,2.75rem)]"
           }`}
         >
           {t("offerPercent")}
         </p>
-        <p className="mt-2 font-display text-lg leading-snug text-[var(--ink)] sm:text-xl">
+        <p
+          className={`mt-1.5 font-display leading-snug text-[var(--ink)] sm:mt-2 sm:text-xl ${
+            prominent ? "text-base sm:text-xl" : "text-lg"
+          }`}
+        >
           {t("offerHeadline")}
         </p>
-        <p className="mt-1.5 max-w-md text-sm leading-relaxed text-[var(--ink-muted)]">
+        <p
+          className={`mt-1 max-w-md leading-snug text-[var(--ink-muted)] sm:mt-1.5 sm:text-sm sm:leading-relaxed ${
+            prominent ? "text-[0.8rem] sm:text-sm" : "text-sm leading-relaxed"
+          }`}
+        >
           {t("offerBody")}
         </p>
       </div>

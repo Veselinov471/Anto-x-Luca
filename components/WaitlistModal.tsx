@@ -38,10 +38,16 @@ export function WaitlistModal({ open, productId, onClose }: Props) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-end justify-center sm:items-center sm:p-6">
+    <div
+      className="fixed inset-0 z-[70] flex items-center justify-center px-3 sm:px-6"
+      style={{
+        paddingTop: "max(0.5rem, env(safe-area-inset-top, 0px))",
+        paddingBottom: "max(0.5rem, env(safe-area-inset-bottom, 0px))",
+      }}
+    >
       <button
         type="button"
-        className="absolute inset-0 bg-[rgba(18,14,12,0.55)] backdrop-blur-[2px]"
+        className="absolute inset-0 bg-[rgba(18,14,12,0.48)] backdrop-blur-[8px]"
         aria-label={t("modalClose")}
         onClick={onClose}
       />
@@ -51,21 +57,20 @@ export function WaitlistModal({ open, productId, onClose }: Props) {
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="relative z-10 flex max-h-[92svh] w-full max-w-lg flex-col overflow-hidden border border-[var(--line)] bg-[var(--bg-elevated)] shadow-[var(--shadow-soft)] sm:max-h-[90vh]"
-        style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
+        className="relative z-10 flex max-h-[calc(100dvh-1rem)] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--bg-elevated)] shadow-[0_24px_80px_rgba(18,14,12,0.28)] sm:max-h-[min(92dvh,44rem)]"
       >
-        <div className="flex items-start justify-between gap-4 border-b border-[var(--line)] px-4 py-4 sm:px-6">
+        <div className="flex shrink-0 items-start justify-between gap-3 border-b border-[var(--line)] px-4 py-3 sm:gap-4 sm:px-6 sm:py-4">
           <div className="min-w-0">
             <p className="text-[0.65rem] uppercase tracking-[0.22em] text-[var(--ink-muted)]">
               {t("eyebrow")}
             </p>
             <h2
               id={titleId}
-              className="mt-1 font-display text-[1.55rem] leading-tight sm:text-2xl"
+              className="mt-0.5 font-display text-[1.4rem] leading-tight sm:mt-1 sm:text-2xl"
             >
               {t("modalTitle")}
             </h2>
-            <p className="mt-1 text-sm text-[var(--ink-muted)]">
+            <p className="mt-1 text-[0.85rem] leading-snug text-[var(--ink-muted)] sm:text-sm">
               {t("modalSubtitle")}
             </p>
           </div>
@@ -73,15 +78,15 @@ export function WaitlistModal({ open, productId, onClose }: Props) {
             ref={closeRef}
             type="button"
             onClick={onClose}
-            className="flex size-11 shrink-0 items-center justify-center text-2xl leading-none text-[var(--ink-muted)] transition hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
+            className="flex size-10 shrink-0 items-center justify-center text-2xl leading-none text-[var(--ink-muted)] transition hover:text-[var(--ink)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)] sm:size-11"
             aria-label={t("modalClose")}
           >
             ×
           </button>
         </div>
 
-        <div className="overflow-y-auto px-4 py-4 sm:px-6 sm:py-5">
-          <div className="mb-4 sm:mb-5">
+        <div className="overflow-y-auto px-4 py-3 sm:px-6 sm:py-5">
+          <div className="mb-3 sm:mb-5">
             <PreorderOffer prominent />
           </div>
           <LeadForm

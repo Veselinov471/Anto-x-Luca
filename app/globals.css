@@ -149,13 +149,75 @@ body {
   }
 }
 
+@keyframes product-detail-backdrop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes product-detail-panel {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes product-detail-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes product-detail-image {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.product-detail-backdrop {
+  animation: product-detail-backdrop 0.35s ease both;
+}
+
+.product-detail-panel {
+  animation: product-detail-panel 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.product-detail-rise {
+  animation: product-detail-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.product-detail-image {
+  animation: product-detail-image 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .reveal,
   .fade-in,
-  .hero-kenburns {
+  .hero-kenburns,
+  .product-detail-backdrop,
+  .product-detail-panel,
+  .product-detail-rise,
+  .product-detail-image {
     animation: none;
   }
 }

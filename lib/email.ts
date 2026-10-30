@@ -15,7 +15,7 @@ export async function notifyNewLead(payload: {
 
   const resend = new Resend(apiKey);
   await resend.emails.send({
-    from: process.env.LEADS_FROM_EMAIL ?? "Anto x Luca <onboarding@resend.dev>",
+    from: process.env.LEADS_FROM_EMAIL ?? "Italian Touch <onboarding@resend.dev>",
     to: [to],
     subject: `Нов запис за ранен достъп: ${payload.preferredProduct}`,
     text: [

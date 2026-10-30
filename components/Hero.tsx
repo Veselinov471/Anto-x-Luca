@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { WaitlistModal } from "@/components/WaitlistModal";
 
 const HERO_SLIDES = [
   {
@@ -28,6 +29,7 @@ export function Hero() {
   const nav = useTranslations("nav");
   const [index, setIndex] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
   const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
@@ -126,16 +128,17 @@ export function Hero() {
       >
         <div className="flex items-center justify-between gap-3 pt-1">
           <p className="font-display text-[1.35rem] tracking-wide sm:text-2xl md:text-3xl">
-            Anto x Luca
+            Italian Touch
           </p>
           <div className="flex items-center gap-2 sm:gap-4 md:gap-6">
             <LanguageSwitcher />
-            <a
-              href="#waitlist"
+            <button
+              type="button"
+              onClick={() => setWaitlistOpen(true)}
               className="hidden min-h-11 items-center text-xs uppercase tracking-[0.18em] text-white/80 hover:text-white sm:inline-flex"
             >
               {nav("earlyAccess")}
-            </a>
+            </button>
           </div>
         </div>
 
@@ -152,11 +155,12 @@ export function Hero() {
 
           <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
             <Button
-              href="#waitlist"
+              type="button"
               variant="primary"
               className="w-full bg-white text-[var(--ink)] hover:bg-[var(--bg)] sm:w-auto"
               ctaId="hero_waitlist"
               location="hero"
+              onClick={() => setWaitlistOpen(true)}
             >
               {t("ctaWaitlist")}
             </Button>
@@ -196,6 +200,12 @@ export function Hero() {
           </div>
         </div>
       </div>
+
+      <WaitlistModal
+        open={waitlistOpen}
+        productId={null}
+        onClose={() => setWaitlistOpen(false)}
+      />
     </header>
   );
 }

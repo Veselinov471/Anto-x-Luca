@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { leadSchema } from "@/lib/validation";
+import { createLeadSchema, parseLeadLocale } from "@/lib/validation";
+import { apiMessage } from "@/lib/api-messages";
 import { getSupabaseAdmin } from "@/lib/supabase";
 import { notifyNewLead } from "@/lib/email";
 import { rateLimit } from "@/lib/rate-limit";
@@ -28,27 +29,31 @@ export async function POST(request: Request) {
     request.headers.get("x-real-ip") ||
     "unknown";
 
-  const limited = rateLimit(`leads:${ip}`);
-  if (!limited.ok) {
-    return NextResponse.json(
-      { ok: false, error: "Твърде много опити. Изчакайте минута и опитайте отново." },
-      { status: 429 },
-    );
-  }
-
   let body: unknown;
   try {
     body = await request.json();
   } catch {
+    const locale = parseLeadLocale(null, request.headers.get("x-locale"));
     return NextResponse.json(
-      { ok: false, error: "Невалидна заявка." },
+      { ok: false, error: apiMessage(locale, "invalidRequest") },
       { status: 400 },
     );
   }
 
-  const parsed = leadSchema.safeParse(body);
+  const locale = parseLeadLocale(body, request.headers.get("x-locale"));
+
+  const limited = rateLimit(`leads:${ip}`);
+  if (!limited.ok) {
+    return NextResponse.json(
+      { ok: false, error: apiMessage(locale, "rateLimited") },
+      { status: 429 },
+    );
+  }
+
+  const parsed = createLeadSchema(locale).safeParse(body);
   if (!parsed.success) {
-    const message = parsed.error.issues[0]?.message ?? "Моля, проверете попълнените данни.";
+    const message =
+      parsed.error.issues[0]?.message ?? apiMessage(locale, "checkFields");
     return NextResponse.json({ ok: false, error: message }, { status: 400 });
   }
 
@@ -59,10 +64,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
+  const preferredList = data.preferredProducts.join(",");
+
   const row = {
     email: data.email.toLowerCase(),
     first_name: data.firstName || null,
-    preferred_product: data.preferredProduct,
+    preferred_product: preferredList,
     consent_marketing: true,
     source: data.source || null,
     campaign: data.campaign || null,
@@ -79,16 +86,13 @@ export async function POST(request: Request) {
     if (error) {
       if (error.code === "23505") {
         return NextResponse.json(
-          {
-            ok: false,
-            error: "Този имейл вече е записан. Ще се свържем с вас.",
-          },
+          { ok: false, error: apiMessage(locale, "emailExists") },
           { status: 409 },
         );
       }
       console.error("[leads] supabase error", error);
       return NextResponse.json(
-        { ok: false, error: "Не успяхме да запишем данните. Опитайте отново." },
+        { ok: false, error: apiMessage(locale, "saveFailed") },
         { status: 500 },
       );
     }
@@ -96,10 +100,7 @@ export async function POST(request: Request) {
     const store = memoryStore();
     if (store.some((l) => l.email === row.email)) {
       return NextResponse.json(
-        {
-          ok: false,
-          error: "Този имейл вече е записан. Ще се свържем с вас.",
-        },
+        { ok: false, error: apiMessage(locale, "emailExists") },
         { status: 409 },
       );
     }
@@ -115,7 +116,7 @@ export async function POST(request: Request) {
     await notifyNewLead({
       email: row.email,
       firstName: data.firstName || undefined,
-      preferredProduct: row.preferred_product,
+      preferredProduct: preferredList,
       campaign: data.campaign,
     });
   } catch (err) {

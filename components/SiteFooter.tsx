@@ -15,7 +15,7 @@ export function SiteFooter() {
         style={{ paddingBottom: "max(2.5rem, calc(1.5rem + env(safe-area-inset-bottom, 0px)))" }}
       >
         <div>
-          <p className="font-display text-2xl">Anto x Luca</p>
+          <p className="font-display text-2xl">Italian Touch</p>
           <p className="mt-2 max-w-sm text-[0.9rem] leading-relaxed text-white/70 sm:text-sm">
             {t("tagline")}
           </p>
@@ -23,9 +23,9 @@ export function SiteFooter() {
             {t("emailLabel")}{" "}
             <a
               className="underline underline-offset-2 break-all"
-              href="mailto:hello@antoxluca.example"
+              href="mailto:hello@italiantouch.example"
             >
-              hello@antoxluca.example
+              hello@italiantouch.example
             </a>
           </p>
           <p className="mt-2 text-xs leading-relaxed text-white/45">
@@ -41,9 +41,9 @@ export function SiteFooter() {
             <Link href="/cookies" className="min-h-10 inline-flex items-center hover:text-white">
               {nav("cookies")}
             </Link>
-            <a href="#faq" className="min-h-10 inline-flex items-center hover:text-white">
+            <Link href="/faq" className="min-h-10 inline-flex items-center hover:text-white">
               {nav("faq")}
-            </a>
+            </Link>
           </nav>
         </div>
       </div>

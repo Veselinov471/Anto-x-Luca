@@ -7,15 +7,21 @@ import { ProductPhoto } from "@/components/ui/ProductPlaceholder";
 import { PriceDisplay } from "@/components/ui/PriceDisplay";
 import { Button } from "@/components/ui/Button";
 import { WaitlistModal } from "@/components/WaitlistModal";
+import { ProductDetailModal } from "@/components/ProductDetailModal";
 import { trackEvent } from "@/lib/analytics";
 
 function ProductCard({
   product,
   position,
+  featured = false,
+  onOpenDetails,
   onWantModel,
 }: {
   product: Product;
   position: number;
+  /** Desktop-only: larger card on a 2-up row. */
+  featured?: boolean;
+  onOpenDetails: (productId: string, colorIndex: number) => void;
   onWantModel: (productId: string) => void;
 }) {
   const t = useTranslations("collection");
@@ -48,35 +54,55 @@ function ProductCard({
     return () => observer.disconnect();
   }, [product, position, name]);
 
-  const openModal = (from: "image" | "button") => {
+  const openDetails = () => {
     trackEvent("product_click", {
       product_id: product.id,
       product_name: name,
       price: product.priceEur,
       currency: "EUR",
       position,
+      source: "image",
     });
-    if (from === "image") {
-      trackEvent("cta_click", {
-        cta_id: `product_${product.id}`,
-        location: "collection",
-      });
-    }
+    onOpenDetails(product.id, colorIndex);
+  };
+
+  const openWaitlist = () => {
+    trackEvent("product_click", {
+      product_id: product.id,
+      product_name: name,
+      price: product.priceEur,
+      currency: "EUR",
+      position,
+      source: "button",
+    });
     onWantModel(product.id);
   };
 
   return (
-    <article ref={ref} id={product.slug} className="group flex h-full flex-col">
+    <article
+      ref={ref}
+      id={product.slug}
+      className={`group flex h-full flex-col ${
+        featured ? "lg:col-span-3" : "lg:col-span-2"
+      }`}
+    >
       <button
         type="button"
-        onClick={() => openModal("image")}
-        className="block w-full touch-manipulation text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
+        onClick={openDetails}
+        aria-label={t("openDetails", { name })}
+        className="relative block w-full touch-manipulation text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)]"
       >
         <ProductPhoto
           src={color.image}
           alt={`${name}, ${tc(color.id)}`}
           priority={position <= 2}
+          featured={featured}
         />
+        <span className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-[rgba(18,14,12,0.5)] to-transparent pb-3 pt-10 opacity-100 transition duration-500 sm:opacity-0 sm:group-hover:opacity-100">
+          <span className="text-[0.65rem] uppercase tracking-[0.18em] text-white/95 lg:text-[0.7rem]">
+            {t("viewDetails")}
+          </span>
+        </span>
       </button>
       <div
         className="mt-2 flex flex-wrap sm:mt-3"
@@ -108,7 +134,13 @@ function ProductCard({
       </div>
       <div className="mt-1.5 flex flex-1 flex-col space-y-1.5 sm:mt-2 sm:space-y-3">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="font-display text-[1.15rem] leading-tight sm:text-2xl">
+          <h3
+            className={`font-display leading-tight ${
+              featured
+                ? "text-[1.15rem] sm:text-2xl lg:text-[2.15rem]"
+                : "text-[1.15rem] sm:text-2xl"
+            }`}
+          >
             {name}
           </h3>
           {product.madeInItaly ? (
@@ -120,20 +152,30 @@ function ProductCard({
         <p className="text-[10px] uppercase tracking-[0.16em] text-[var(--ink-muted)]">
           {tc(color.id)}
         </p>
-        <p className="hidden text-sm leading-relaxed text-[var(--ink-muted)] sm:block">
+        <p
+          className={`hidden leading-relaxed text-[var(--ink-muted)] sm:block ${
+            featured ? "text-sm lg:text-[1.05rem]" : "text-sm"
+          }`}
+        >
           {tp("shortDescription")}
         </p>
         <p className="hidden text-sm text-[var(--ink-muted)] sm:block">
           {tp("material")}
         </p>
-        <PriceDisplay priceEur={product.priceEur} productId={product.id} />
+        <PriceDisplay
+          priceEur={product.priceEur}
+          productId={product.id}
+          className={
+            featured ? "lg:[&_span]:text-xl" : undefined
+          }
+        />
         <Button
           type="button"
           variant="secondary"
           className="mt-auto w-full px-2 text-[0.78rem] sm:mt-0 sm:w-auto sm:px-6 sm:text-sm"
           ctaId={`product_${product.id}`}
           location="collection"
-          onClick={() => openModal("button")}
+          onClick={openWaitlist}
         >
           {t("cta")}
         </Button>
@@ -144,7 +186,16 @@ function ProductCard({
 
 export function ProductCollection() {
   const t = useTranslations("collection");
-  const [modalProductId, setModalProductId] = useState<string | null>(null);
+  const [detail, setDetail] = useState<{
+    productId: string;
+    colorIndex: number;
+  } | null>(null);
+  const [waitlistProductId, setWaitlistProductId] = useState<string | null>(
+    null,
+  );
+
+  const detailProduct =
+    products.find((p) => p.id === detail?.productId) ?? null;
 
   return (
     <section id="collection" className="section-pad section-y">
@@ -160,22 +211,41 @@ export function ProductCollection() {
             {t("subtitle")}
           </p>
         </div>
-        <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-8 sm:mt-14 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-12">
-          {products.map((product, index) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              position={index + 1}
-              onWantModel={setModalProductId}
-            />
-          ))}
+        <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-8 sm:mt-14 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-6 lg:gap-x-10 lg:gap-y-14">
+          {products.map((product, index) => {
+            const featured =
+              index < 2 || index >= products.length - 2;
+            return (
+              <ProductCard
+                key={product.id}
+                product={product}
+                position={index + 1}
+                featured={featured}
+                onOpenDetails={(productId, colorIndex) =>
+                  setDetail({ productId, colorIndex })
+                }
+                onWantModel={setWaitlistProductId}
+              />
+            );
+          })}
         </div>
       </div>
 
+      <ProductDetailModal
+        open={detail != null}
+        product={detailProduct}
+        initialColorIndex={detail?.colorIndex ?? 0}
+        onClose={() => setDetail(null)}
+        onWantModel={(productId) => {
+          setDetail(null);
+          setWaitlistProductId(productId);
+        }}
+      />
+
       <WaitlistModal
-        open={modalProductId != null}
-        productId={modalProductId}
-        onClose={() => setModalProductId(null)}
+        open={waitlistProductId != null}
+        productId={waitlistProductId}
+        onClose={() => setWaitlistProductId(null)}
       />
     </section>
   );

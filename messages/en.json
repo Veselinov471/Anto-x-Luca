@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Anto x Luca — Italian women's handbags",
+    "title": "Italian Touch — Italian women's handbags",
     "description": "A small selection of handbags made in Italy. Clear prices and early access for Bulgaria.",
     "ogDescription": "Italian elegance for every day. Join early access."
   },
@@ -24,11 +24,32 @@
   },
   "collection": {
     "eyebrow": "The collection",
-    "title": "Six models. No noise.",
+    "title": "The first 10 models.",
     "subtitle": "A small selection, each in several colours. Prices are clear. Choose the one you want to see first.",
     "madeInItaly": "Made in Italy",
     "cta": "Get early access",
-    "colorsLabel": "Colours"
+    "colorsLabel": "Colours",
+    "openDetails": "View details for {name}",
+    "viewDetails": "View details"
+  },
+  "productDetail": {
+    "eyebrow": "Model dossier",
+    "close": "Close",
+    "summaryLabel": "The story",
+    "specsLabel": "Parameters",
+    "material": "Material",
+    "dimensions": "Dimensions",
+    "intendedUse": "Best for",
+    "hardware": "Hardware",
+    "closure": "Closure",
+    "carry": "How you carry it",
+    "origin": "Origin",
+    "originValue": "Made in Italy",
+    "originBadge": "Italy",
+    "colours": "Colours",
+    "colourCount": "{count} available",
+    "cta": "Get early access for this model",
+    "hint": "No payment now — first 20 preorders get 20% off."
   },
   "whyItaly": {
     "eyebrow": "Origin",
@@ -38,28 +59,6 @@
     "li1": "Origin: Italy",
     "li2": "Approach: a small, carefully chosen selection",
     "li3": "Promise: clear facts instead of loud superlatives"
-  },
-  "details": {
-    "eyebrow": "Details",
-    "title": "What you know today.",
-    "subtitle": "Full specifications will be published before orders open. Until then — silhouette, purpose, and price, with no invented specs.",
-    "material": "Material",
-    "dimensions": "Dimensions",
-    "intendedUse": "Best for",
-    "origin": "Origin",
-    "originValue": "Made in Italy"
-  },
-  "lifestyle": {
-    "eyebrow": "In the rhythm of the day",
-    "title": "For your life — not only the display window.",
-    "subtitle": "Soon you will see the bags in real situations. While we prepare our own photography, we make it clear these are temporary visuals — no stock photos presented as ours.",
-    "soon": "Real photos coming soon",
-    "office": "Office",
-    "officeHint": "For the workday",
-    "city": "City",
-    "cityHint": "For moving through town",
-    "weekend": "Weekend",
-    "weekendHint": "For freer days"
   },
   "trust": {
     "eyebrow": "Trust",
@@ -86,6 +85,7 @@
   "faq": {
     "eyebrow": "Questions & answers",
     "title": "Before you join",
+    "back": "Back to home",
     "items": {
       "origin": {
         "q": "Where are the bags made?",
@@ -139,9 +139,10 @@
     "subtitle": "No payment now. Tell us which model you like — and we will notify you when orders open. The first 20 preorders get 20% off.",
     "firstName": "Name (optional)",
     "email": "Email *",
-    "product": "The model you like *",
-    "productPlaceholder": "Choose a model",
-    "consent": "I agree to receive early-access updates and news from Anto x Luca. I can unsubscribe at any time. See the",
+    "product": "The models you like *",
+    "productPlaceholder": "Select at least one model",
+    "productHint": "You can tick more than one.",
+    "consent": "I agree to receive early-access updates and news from Italian Touch. I can unsubscribe at any time. See the",
     "privacyLink": "Privacy Policy",
     "submit": "Get early access",
     "submitting": "Saving…",
@@ -158,7 +159,7 @@
     "offerBody": "Join the list now. The first 20 who place a preorder get 20% off when orders open."
   },
   "footer": {
-    "tagline": "Women’s handbags made in Italy. For women in Bulgaria who want clean style without the noise.",
+    "tagline": "Women’s handbags made in Italy. For women who want clean style without the noise.",
     "emailLabel": "Email:",
     "companyNote": "Company details and phone will be added before sales begin."
   },
@@ -173,7 +174,7 @@
     "eyebrow": "Draft — pending legal review",
     "title": "Privacy Policy",
     "banner": "This text is provisional and will be replaced after review by a Bulgaria / EU legal professional. It is not a final legal document.",
-    "p1": "Anto x Luca collects an email address, optional name, and preferred model to provide early access and related messages — only with your consent.",
+    "p1": "Italian Touch collects an email address, optional name, and preferred model to provide early access and related messages — only with your consent.",
     "p2": "We process only what is necessary. After legal editing, this page will include: the data controller, legal basis, retention periods, your rights, and how to submit a GDPR request.",
     "p3": "You can unsubscribe from marketing messages at any time via the link in the email once we start sending them.",
     "back": "Back to home"
@@ -211,50 +212,120 @@
     "cipria": "Powder",
     "blu_notte": "Night blue",
     "senape": "Mustard",
-    "argento": "Silver"
+    "argento": "Silver",
+    "blu": "Blue",
+    "caramello": "Caramel"
   },
   "products": {
     "PRODUCT_01": {
       "name": "Serena",
       "shortDescription": "A roomy trapeze tote with two gold locks — enough for the day, still light in the hand.",
+      "summary": "Serena is the bag you reach for when the day has layers — laptop sleeve, glasses, a scarf — and you still want clean lines. The trapeze silhouette opens wide; the twin gold locks keep it composed. It reads Italian without shouting: structured enough for the office, soft enough to forget you’re carrying it.",
       "material": "Genuine leather",
       "dimensions": "32 × 21 × 19 cm",
-      "intendedUse": "Everyday city wear"
+      "intendedUse": "Everyday city wear",
+      "hardware": "Gold-tone twin turn locks",
+      "closure": "Double front lock straps",
+      "carry": "Double top handles"
     },
     "PRODUCT_02": {
       "name": "Melody",
       "shortDescription": "A flat shoulder bag with a curved flap and a quiet gold lock — easy across the body.",
+      "summary": "Melody sits close to the body and stays out of the way. The curved flap and quiet lock make it feel finished, not flashy — the kind of bag you wear from coffee to dinner without switching. Slim profile, honest leather, one clear gesture.",
       "material": "Genuine leather",
       "dimensions": "28 × 17 × 9 cm",
-      "intendedUse": "Day to evening"
+      "intendedUse": "Day to evening",
+      "hardware": "Gold-tone twist lock",
+      "closure": "Curved flap with lock",
+      "carry": "Shoulder / crossbody strap"
     },
     "PRODUCT_03": {
       "name": "Federica",
       "shortDescription": "Soft suede with a drawstring and a leather flap — relaxed, and still finished.",
+      "summary": "Federica is the soft counterpoint in the collection. Suede that catches light, a leather flap that keeps the line calm, drawstrings that loosen the form just enough. It feels lived-in from day one — for women who want texture over shine, and ease over structure.",
       "material": "Genuine suede",
       "dimensions": "30 × 18 × 11 cm",
-      "intendedUse": "Everyday"
+      "intendedUse": "Everyday",
+      "hardware": "Gold-tone side clips",
+      "closure": "Leather flap + side drawstrings",
+      "carry": "Wide adjustable shoulder strap"
     },
     "PRODUCT_04": {
       "name": "Conny",
       "shortDescription": "A small box bag with a knotted handle — compact, with a clear shape.",
+      "summary": "Conny is deliberate volume in a small footprint. The box silhouette holds its shape; the knotted handle is the signature — a single handmade gesture. Ideal when you want presence without bulk: evening, short city hops, or as the bag that finishes an outfit.",
       "material": "Genuine leather",
       "dimensions": "22 × 12 × 11 cm",
-      "intendedUse": "City and evening"
+      "intendedUse": "City and evening",
+      "hardware": "Gold-tone accents",
+      "closure": "Top opening with structured body",
+      "carry": "Knotted top handle"
     },
     "PRODUCT_05": {
       "name": "Elisa",
       "shortDescription": "A small baguette with a bamboo clasp and a thin strap — for the essentials, nothing more.",
+      "summary": "Elisa edits the day down to what matters: phone, keys, cardholder. The baguette proportion and bamboo clasp give it a quiet editorial note — warm, tactile, not costume. Wear it high under the arm when you want the look to stay light.",
       "material": "Genuine leather",
       "dimensions": "Dimensions will be confirmed",
-      "intendedUse": "Day and evening"
+      "intendedUse": "Day and evening",
+      "hardware": "Bamboo clasp, slim metal fittings",
+      "closure": "Bamboo front clasp",
+      "carry": "Thin adjustable strap"
     },
     "PRODUCT_06": {
       "name": "Bianca",
       "shortDescription": "A structured top-handle with a bamboo clasp and a gold chain — finished, without extra shine.",
+      "summary": "Bianca is architecture you can hold. Structured body, bamboo clasp, optional gold chain — polish without theatrics. It moves between desk and dinner with the same composure: the bag for women who want one strong silhouette, not a rotation of micro trends.",
       "material": "Genuine leather",
       "dimensions": "Dimensions will be confirmed",
-      "intendedUse": "Everyday elegance"
+      "intendedUse": "Everyday elegance",
+      "hardware": "Bamboo clasp + gold-tone chain",
+      "closure": "Bamboo front clasp",
+      "carry": "Top handle and chain strap"
+    },
+    "PRODUCT_07": {
+      "name": "Lila",
+      "shortDescription": "A compact bucket bag with a round top handle and a gold padlock detail — small, with a clear silhouette.",
+      "summary": "Lila is compact geometry: a mini bucket with a round handle and a gold padlock as punctuation. Small enough for evenings, defined enough for day. The silhouette is unmistakable from across the room — volume at the base, clean arc above.",
+      "material": "Genuine leather",
+      "dimensions": "16 × 16 × 11 cm",
+      "intendedUse": "City and evening",
+      "hardware": "Gold-tone padlock detail",
+      "closure": "Draw-top with padlock accent",
+      "carry": "Round top handle"
+    },
+    "PRODUCT_08": {
+      "name": "Fiocco",
+      "shortDescription": "A soft gathered top-handle with large gold rings and a removable strap — light to carry, day to night.",
+      "summary": "Fiocco gathers at the top like a soft knot — peplum ease with gold rings that catch the light. Removable strap means hand-held one hour, crossbody the next. It’s the playful piece in the lineup: light, tactile, ready for day into night without a costume change.",
+      "material": "Genuine leather",
+      "dimensions": "23 × 14.5 × 8 cm",
+      "intendedUse": "Day and evening",
+      "hardware": "Large gold-tone rings",
+      "closure": "Soft gathered top",
+      "carry": "Top handle + removable strap"
+    },
+    "PRODUCT_09": {
+      "name": "Sopie",
+      "shortDescription": "A classic kiss-lock frame clutch with a gold chain — for the essentials, with a vintage note.",
+      "summary": "Sopie is a wink to vintage frame bags — kiss-lock metal, gold chain, just enough room for the night’s essentials. It doesn’t pretend to be a day tote; it owns the evening. Click the frame shut and the look is complete.",
+      "material": "Genuine leather",
+      "dimensions": "25 × 15 × 9 cm",
+      "intendedUse": "Evening and city",
+      "hardware": "Gold-tone kiss-lock frame + chain",
+      "closure": "Classic kiss-lock frame",
+      "carry": "Gold chain strap"
+    },
+    "PRODUCT_10": {
+      "name": "Bombola",
+      "shortDescription": "A mini suede top-handle with a bamboo twist-lock and a gold chain — compact and finished.",
+      "summary": "Bombola is the smallest finished statement: suede body, bamboo twist-lock, gold chain. Compact enough for a night out, tactile enough to feel special in the hand. A mini with presence — not a shrink-ray of a larger bag.",
+      "material": "Genuine suede",
+      "dimensions": "19 × 12 × 9 cm",
+      "intendedUse": "Day and evening",
+      "hardware": "Bamboo twist-lock + gold-tone chain",
+      "closure": "Bamboo twist-lock",
+      "carry": "Top handle and chain strap"
     }
   }
 }

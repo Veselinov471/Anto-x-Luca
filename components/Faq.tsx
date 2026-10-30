@@ -5,19 +5,32 @@ import { useTranslations } from "next-intl";
 import { faqIds } from "@/data/products";
 import { trackEvent } from "@/lib/analytics";
 
-export function Faq() {
+type Props = {
+  /** Dedicated FAQ page uses h1 and page padding. */
+  standalone?: boolean;
+};
+
+export function Faq({ standalone = false }: Props) {
   const t = useTranslations("faq");
   const [openId, setOpenId] = useState<string | null>(null);
+  const Heading = standalone ? "h1" : "h2";
 
   return (
-    <section id="faq" className="bg-[var(--bg-elevated)] section-y">
-      <div className="section-pad mx-auto max-w-3xl">
+    <section
+      id="faq"
+      className={
+        standalone
+          ? "section-pad bg-[var(--bg)] pt-10 pb-6 sm:pt-14 sm:pb-8"
+          : "bg-[var(--bg-elevated)] section-y"
+      }
+    >
+      <div className="mx-auto max-w-3xl">
         <p className="text-[0.65rem] uppercase tracking-[0.22em] text-[var(--ink-muted)] sm:text-xs">
           {t("eyebrow")}
         </p>
-        <h2 className="mt-2 font-display text-[1.85rem] leading-tight sm:mt-3 sm:text-3xl md:text-5xl">
+        <Heading className="mt-2 font-display text-[1.85rem] leading-tight sm:mt-3 sm:text-3xl md:text-5xl">
           {t("title")}
-        </h2>
+        </Heading>
         <div className="mt-8 divide-y divide-[var(--line)] border-y border-[var(--line)] sm:mt-10">
           {faqIds.map((id) => {
             const open = openId === id;

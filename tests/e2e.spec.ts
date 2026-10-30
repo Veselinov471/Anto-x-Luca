@@ -14,13 +14,11 @@ test("product CTA opens waitlist modal", async ({ page }) => {
   await dismissConsent(page);
 
   await page.locator("#collection").scrollIntoViewIfNeeded();
-  await page.getByRole("button", { name: "Искам ранен достъп" }).first().click();
+  await page.getByRole("button", { name: "Искам този модел" }).first().click();
 
   const modal = page.getByRole("dialog", { name: /Ранен достъп за този модел/i });
   await expect(modal).toBeVisible();
-  await expect(modal.locator('select[name="preferredProduct"]')).toHaveValue(
-    "PRODUCT_01",
-  );
+  await expect(modal.locator('input[name="preferredProducts"][value="PRODUCT_01"]')).toBeChecked();
 
   await modal.getByRole("button", { name: "Затвори" }).click();
   await expect(modal).toHaveCount(0);
@@ -36,7 +34,7 @@ test("Bulgarian landing → waitlist", async ({ page }) => {
 
   await page.locator("#waitlist").scrollIntoViewIfNeeded();
   await page.locator('#waitlist input[name="email"]').fill(`test+${Date.now()}@example.com`);
-  await page.locator('#waitlist select[name="preferredProduct"]').selectOption("PRODUCT_01");
+  await page.locator('#waitlist input[name="preferredProducts"][value="PRODUCT_01"]').check();
   await page.locator('#waitlist input[name="consentMarketing"]').check();
   await page.locator("#waitlist").getByRole("button", { name: "Искам ранен достъп" }).click();
   await expect(page.locator("#waitlist").getByRole("status")).toContainText("Записани сте", {
@@ -54,7 +52,7 @@ test("English landing → waitlist", async ({ page }) => {
 
   await page.locator("#waitlist").scrollIntoViewIfNeeded();
   await page.locator('#waitlist input[name="email"]').fill(`test+en+${Date.now()}@example.com`);
-  await page.locator('#waitlist select[name="preferredProduct"]').selectOption("PRODUCT_02");
+  await page.locator('#waitlist input[name="preferredProducts"][value="PRODUCT_02"]').check();
   await page.locator('#waitlist input[name="consentMarketing"]').check();
   await page.locator("#waitlist").getByRole("button", { name: "Get early access" }).click();
   await expect(page.locator("#waitlist").getByRole("status")).toContainText("You’re on the list", {

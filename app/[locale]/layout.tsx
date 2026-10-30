@@ -39,7 +39,7 @@ export async function generateMetadata({
     metadataBase: new URL(siteUrl),
     title: {
       default: t("title"),
-      template: `%s · Anto x Luca`,
+      template: `%s · Italian Touch`,
     },
     description: t("description"),
     alternates: {
@@ -53,7 +53,7 @@ export async function generateMetadata({
       type: "website",
       locale: locale === "bg" ? "bg_BG" : "en_GB",
       url: `${siteUrl}${path || "/"}`,
-      siteName: "Anto x Luca",
+      siteName: "Italian Touch",
       title: t("title"),
       description: t("ogDescription"),
     },

@@ -1,4 +1,4 @@
-# Anto x Luca — Bulgaria market validation
+# Italian Touch — Bulgaria market validation
 
 Landing-page MVP to validate demand for Italian-made women's handbags in Bulgaria.
 

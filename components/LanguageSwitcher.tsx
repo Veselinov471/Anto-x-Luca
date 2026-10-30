@@ -1,11 +1,12 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { locales, type Locale } from "@/i18n/config";
 
 export function LanguageSwitcher() {
   const locale = useLocale() as Locale;
+  const t = useTranslations("nav");
   const pathname = usePathname();
   const router = useRouter();
 
@@ -13,7 +14,7 @@ export function LanguageSwitcher() {
     <div
       className="inline-flex items-center rounded-sm border border-current/25 p-0.5"
       role="group"
-      aria-label="Language"
+      aria-label={t("switchLanguage")}
     >
       {locales.map((code) => {
         const active = code === locale;

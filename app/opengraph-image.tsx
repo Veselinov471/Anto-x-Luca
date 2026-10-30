@@ -19,7 +19,7 @@ export default function OgImage() {
           fontFamily: "Georgia, serif",
         }}
       >
-        <div style={{ fontSize: 42, letterSpacing: 2 }}>Anto x Luca</div>
+        <div style={{ fontSize: 42, letterSpacing: 2 }}>Italian Touch</div>
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div style={{ fontSize: 58, lineHeight: 1.1, maxWidth: 960 }}>
             Italian elegance for every day

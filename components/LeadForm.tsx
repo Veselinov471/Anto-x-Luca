@@ -3,7 +3,6 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { products } from "@/data/products";
-import { dualPrice } from "@/lib/pricing";
 import { trackEvent } from "@/lib/analytics";
 import { captureUtmFromLocation, getStoredUtm } from "@/lib/utm";
 import { Button } from "@/components/ui/Button";
@@ -33,10 +32,20 @@ export function LeadForm({
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const [started, setStarted] = useState(false);
+  const [selected, setSelected] = useState<string[]>(
+    preferredProductId ? [preferredProductId] : [],
+  );
 
   useEffect(() => {
     captureUtmFromLocation();
   }, []);
+
+  useEffect(() => {
+    if (!preferredProductId) return;
+    setSelected((prev) =>
+      prev.includes(preferredProductId) ? prev : [preferredProductId, ...prev],
+    );
+  }, [preferredProductId]);
 
   const onFocusForm = () => {
     if (started) return;
@@ -44,20 +53,32 @@ export function LeadForm({
     trackEvent("lead_form_start", { form_id: formId });
   };
 
+  const toggleProduct = (id: string) => {
+    setSelected((prev) =>
+      prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id],
+    );
+  };
+
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("loading");
     setError(null);
 
+    if (selected.length === 0) {
+      setStatus("error");
+      setError(t("productPlaceholder"));
+      return;
+    }
+
     const form = e.currentTarget;
     const data = new FormData(form);
-    const preferredProduct = String(data.get("preferredProduct") ?? "");
     const utm = getStoredUtm();
 
     const payload = {
       email: String(data.get("email") ?? ""),
       firstName: String(data.get("firstName") ?? ""),
-      preferredProduct,
+      preferredProduct: selected[0],
+      preferredProducts: selected,
       consentMarketing: data.get("consentMarketing") === "on",
       website: String(data.get("website") ?? ""),
       source: utm.source,
@@ -66,12 +87,16 @@ export function LeadForm({
       content: utm.content,
       term: utm.term,
       landingVariant: `wave1_${locale}`,
+      locale,
     };
 
     try {
       const res = await fetch("/api/leads", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-locale": locale,
+        },
         body: JSON.stringify(payload),
       });
       const json = (await res.json()) as { ok?: boolean; error?: string };
@@ -80,19 +105,23 @@ export function LeadForm({
         throw new Error(json.error || t("errorGeneric"));
       }
 
-      const product = products.find((p) => p.id === preferredProduct);
       trackEvent("lead_submit", {
         form_id: formId,
-        product_id: preferredProduct,
+        product_id: selected[0],
+        product_ids: selected.join(","),
       });
-      trackEvent("product_interest", {
-        product_id: preferredProduct,
-        price: product?.priceEur,
-        currency: "EUR",
-      });
+      for (const id of selected) {
+        const product = products.find((p) => p.id === id);
+        trackEvent("product_interest", {
+          product_id: id,
+          price: product?.priceEur,
+          currency: "EUR",
+        });
+      }
 
       setStatus("success");
       form.reset();
+      setSelected(preferredProductId ? [preferredProductId] : []);
       onSuccess?.();
     } catch (err) {
       setStatus("error");
@@ -122,18 +151,32 @@ export function LeadForm({
       onFocus={onFocusForm}
       className={
         compact
-          ? "relative space-y-4"
+          ? "relative space-y-3 sm:space-y-4"
           : "relative space-y-4 border border-[var(--line)] bg-[var(--bg-elevated)] p-4 sm:space-y-5 sm:p-6 md:p-8"
       }
       noValidate
     >
-      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+      <div
+        className={`grid sm:grid-cols-2 ${compact ? "gap-3 sm:gap-5" : "gap-4 sm:gap-5"}`}
+      >
         <label className="block text-sm">
-          <span className="mb-2 block text-[var(--ink-muted)]">{t("firstName")}</span>
-          <input name="firstName" autoComplete="given-name" className={fieldClass} />
+          <span
+            className={`block text-[var(--ink-muted)] ${compact ? "mb-1.5" : "mb-2"}`}
+          >
+            {t("firstName")}
+          </span>
+          <input
+            name="firstName"
+            autoComplete="given-name"
+            className={fieldClass}
+          />
         </label>
         <label className="block text-sm">
-          <span className="mb-2 block text-[var(--ink-muted)]">{t("email")}</span>
+          <span
+            className={`block text-[var(--ink-muted)] ${compact ? "mb-1.5" : "mb-2"}`}
+          >
+            {t("email")}
+          </span>
           <input
             name="email"
             type="email"
@@ -145,32 +188,52 @@ export function LeadForm({
         </label>
       </div>
 
-      <label className="block text-sm">
-        <span className="mb-2 block text-[var(--ink-muted)]">{t("product")}</span>
-        <select
-          name="preferredProduct"
-          required
-          defaultValue={preferredProductId ?? ""}
-          className={`${fieldClass} appearance-none bg-[length:1rem] bg-[right_0.75rem_center] bg-no-repeat pr-10`}
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235c564e' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`,
-          }}
+      <fieldset className="block text-sm">
+        <legend
+          className={`block text-[var(--ink-muted)] ${compact ? "mb-1.5" : "mb-2"}`}
         >
-          <option value="" disabled>
-            {t("productPlaceholder")}
-          </option>
+          {t("product")}
+        </legend>
+        <p className="mb-2 text-[0.75rem] text-[var(--ink-muted)]">
+          {t("productHint")}
+        </p>
+        <div
+          className={`grid grid-cols-2 gap-1.5 sm:gap-2 ${compact ? "" : "sm:grid-cols-2"}`}
+          role="group"
+          aria-label={t("product")}
+        >
           {products.map((p) => {
-            const { eurLabel } = dualPrice(p.priceEur);
+            const checked = selected.includes(p.id);
             return (
-              <option key={p.id} value={p.id}>
-                {tp(`${p.id}.name`)} — {eurLabel}
-              </option>
+              <label
+                key={p.id}
+                className={`flex min-h-11 cursor-pointer items-center gap-2 border px-2.5 py-2 touch-manipulation transition sm:min-h-12 sm:px-3 ${
+                  checked
+                    ? "border-[var(--ink)] bg-[color-mix(in_srgb,var(--ink)_6%,white)]"
+                    : "border-[var(--line)] bg-white hover:border-[var(--ink-muted)]"
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  name="preferredProducts"
+                  value={p.id}
+                  checked={checked}
+                  onChange={() => toggleProduct(p.id)}
+                  className="size-4 shrink-0 accent-[var(--accent)] touch-manipulation sm:size-[1.05rem]"
+                />
+                <span className="truncate text-[0.82rem] font-medium text-[var(--ink)] sm:text-sm">
+                  {tp(`${p.id}.name`)}
+                </span>
+              </label>
             );
           })}
-        </select>
-      </label>
+        </div>
+      </fieldset>
 
-      <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
+      <div
+        className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+        aria-hidden
+      >
         <label>
           Website
           <input name="website" tabIndex={-1} autoComplete="off" />
