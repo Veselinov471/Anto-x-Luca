@@ -105,7 +105,7 @@ function ProductCard({
         </span>
       </button>
       <div
-        className="mt-2 flex flex-wrap sm:mt-3"
+        className="mt-2 flex h-9 flex-nowrap overflow-hidden sm:mt-3 sm:h-auto sm:flex-wrap sm:overflow-visible"
         role="group"
         aria-label={t("colorsLabel")}
       >
@@ -118,7 +118,7 @@ function ProductCard({
               aria-pressed={selected}
               aria-label={tc(option.id)}
               onClick={() => setColorIndex(i)}
-              className="flex size-9 items-center justify-center touch-manipulation focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)] sm:size-11"
+              className="flex size-9 shrink-0 items-center justify-center touch-manipulation focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)] sm:size-11"
             >
               <span
                 className={`size-3 rounded-full ring-1 ring-black/20 sm:size-3.5 ${
@@ -152,6 +152,9 @@ function ProductCard({
         <p className="text-[10px] uppercase tracking-[0.16em] text-[var(--ink-muted)]">
           {tc(color.id)}
         </p>
+        <p className="truncate text-[0.7rem] leading-tight text-[var(--ink-muted)] sm:hidden">
+          {tp("intendedUse")}
+        </p>
         <p
           className={`hidden leading-relaxed text-[var(--ink-muted)] sm:block ${
             featured ? "text-sm lg:text-[1.05rem]" : "text-sm"
@@ -171,8 +174,8 @@ function ProductCard({
         />
         <Button
           type="button"
-          variant="secondary"
-          className="mt-auto w-full px-2 text-[0.78rem] sm:mt-0 sm:w-auto sm:px-6 sm:text-sm"
+          variant="primary"
+          className="mt-auto w-full px-2 text-[0.72rem] sm:mt-0 sm:w-auto sm:px-6 sm:text-sm"
           ctaId={`product_${product.id}`}
           location="collection"
           onClick={openWaitlist}

@@ -32,6 +32,7 @@ export function LeadForm({
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const [started, setStarted] = useState(false);
+  const [showMoreModels, setShowMoreModels] = useState(!preferredProductId);
   const [selected, setSelected] = useState<string[]>(
     preferredProductId ? [preferredProductId] : [],
   );
@@ -129,6 +130,99 @@ export function LeadForm({
     }
   }
 
+  const collapseModels = compact && Boolean(preferredProductId) && !showMoreModels;
+  const visibleProducts = collapseModels
+    ? products.filter((p) => selected.includes(p.id))
+    : products;
+
+  const emailField = (
+    <label className="block text-sm max-sm:order-1">
+      <span
+        className={`block text-[var(--ink-muted)] ${compact ? "mb-1.5" : "mb-2"}`}
+      >
+        {t("email")}
+      </span>
+      <input
+        name="email"
+        type="email"
+        required
+        autoComplete="email"
+        inputMode="email"
+        className={fieldClass}
+      />
+    </label>
+  );
+
+  const nameField = (
+    <label className="block text-sm max-sm:order-2">
+      <span
+        className={`block text-[var(--ink-muted)] ${compact ? "mb-1.5" : "mb-2"}`}
+      >
+        {t("firstName")}
+      </span>
+      <input
+        name="firstName"
+        autoComplete="given-name"
+        className={fieldClass}
+      />
+    </label>
+  );
+
+  const productPicker = (
+    <fieldset className="block text-sm">
+      <legend
+        className={`block text-[var(--ink-muted)] ${compact ? "mb-1.5" : "mb-2"}`}
+      >
+        {t("product")}
+      </legend>
+      {collapseModels ? null : (
+        <p className="mb-2 text-[0.75rem] text-[var(--ink-muted)]">
+          {t("productHint")}
+        </p>
+      )}
+      <div
+        className={`grid grid-cols-2 gap-1.5 sm:gap-2 ${compact ? "" : "sm:grid-cols-2"}`}
+        role="group"
+        aria-label={t("product")}
+      >
+        {visibleProducts.map((p) => {
+          const checked = selected.includes(p.id);
+          return (
+            <label
+              key={p.id}
+              className={`flex min-h-11 cursor-pointer items-center gap-2 border px-2.5 py-2 touch-manipulation transition sm:min-h-12 sm:px-3 ${
+                checked
+                  ? "border-[var(--ink)] bg-[color-mix(in_srgb,var(--ink)_6%,white)]"
+                  : "border-[var(--line)] bg-white hover:border-[var(--ink-muted)]"
+              }`}
+            >
+              <input
+                type="checkbox"
+                name="preferredProducts"
+                value={p.id}
+                checked={checked}
+                onChange={() => toggleProduct(p.id)}
+                className="size-4 shrink-0 accent-[var(--accent)] touch-manipulation sm:size-[1.05rem]"
+              />
+              <span className="truncate text-[0.82rem] font-medium text-[var(--ink)] sm:text-sm">
+                {tp(`${p.id}.name`)}
+              </span>
+            </label>
+          );
+        })}
+      </div>
+      {compact && preferredProductId && !showMoreModels ? (
+        <button
+          type="button"
+          onClick={() => setShowMoreModels(true)}
+          className="mt-2 min-h-10 text-left text-[0.8rem] text-[var(--ink-muted)] underline underline-offset-2 touch-manipulation hover:text-[var(--ink)]"
+        >
+          {t("moreModels")}
+        </button>
+      ) : null}
+    </fieldset>
+  );
+
   if (status === "success") {
     return (
       <div
@@ -151,84 +245,28 @@ export function LeadForm({
       onFocus={onFocusForm}
       className={
         compact
-          ? "relative space-y-3 sm:space-y-4"
-          : "relative space-y-4 border border-[var(--line)] bg-[var(--bg-elevated)] p-4 sm:space-y-5 sm:p-6 md:p-8"
+          ? "relative flex flex-col space-y-3 sm:space-y-4"
+          : "relative flex flex-col space-y-4 border border-[var(--line)] bg-[var(--bg-elevated)] p-4 sm:space-y-5 sm:p-6 md:p-8"
       }
       noValidate
     >
       <div
         className={`grid sm:grid-cols-2 ${compact ? "gap-3 sm:gap-5" : "gap-4 sm:gap-5"}`}
       >
-        <label className="block text-sm">
-          <span
-            className={`block text-[var(--ink-muted)] ${compact ? "mb-1.5" : "mb-2"}`}
-          >
-            {t("firstName")}
-          </span>
-          <input
-            name="firstName"
-            autoComplete="given-name"
-            className={fieldClass}
-          />
-        </label>
-        <label className="block text-sm">
-          <span
-            className={`block text-[var(--ink-muted)] ${compact ? "mb-1.5" : "mb-2"}`}
-          >
-            {t("email")}
-          </span>
-          <input
-            name="email"
-            type="email"
-            required
-            autoComplete="email"
-            inputMode="email"
-            className={fieldClass}
-          />
-        </label>
+        {compact ? (
+          <>
+            {emailField}
+            {nameField}
+          </>
+        ) : (
+          <>
+            {nameField}
+            {emailField}
+          </>
+        )}
       </div>
 
-      <fieldset className="block text-sm">
-        <legend
-          className={`block text-[var(--ink-muted)] ${compact ? "mb-1.5" : "mb-2"}`}
-        >
-          {t("product")}
-        </legend>
-        <p className="mb-2 text-[0.75rem] text-[var(--ink-muted)]">
-          {t("productHint")}
-        </p>
-        <div
-          className={`grid grid-cols-2 gap-1.5 sm:gap-2 ${compact ? "" : "sm:grid-cols-2"}`}
-          role="group"
-          aria-label={t("product")}
-        >
-          {products.map((p) => {
-            const checked = selected.includes(p.id);
-            return (
-              <label
-                key={p.id}
-                className={`flex min-h-11 cursor-pointer items-center gap-2 border px-2.5 py-2 touch-manipulation transition sm:min-h-12 sm:px-3 ${
-                  checked
-                    ? "border-[var(--ink)] bg-[color-mix(in_srgb,var(--ink)_6%,white)]"
-                    : "border-[var(--line)] bg-white hover:border-[var(--ink-muted)]"
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  name="preferredProducts"
-                  value={p.id}
-                  checked={checked}
-                  onChange={() => toggleProduct(p.id)}
-                  className="size-4 shrink-0 accent-[var(--accent)] touch-manipulation sm:size-[1.05rem]"
-                />
-                <span className="truncate text-[0.82rem] font-medium text-[var(--ink)] sm:text-sm">
-                  {tp(`${p.id}.name`)}
-                </span>
-              </label>
-            );
-          })}
-        </div>
-      </fieldset>
+      {productPicker}
 
       <div
         className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
@@ -272,6 +310,10 @@ export function LeadForm({
       >
         {status === "loading" ? t("submitting") : t("submit")}
       </Button>
+
+      <p className="text-center text-[0.75rem] leading-snug text-[var(--ink-muted)]">
+        {t("deliveryNote")}
+      </p>
     </form>
   );
 }

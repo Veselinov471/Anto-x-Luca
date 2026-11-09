@@ -17,6 +17,7 @@
   --section-y: clamp(3.25rem, 8vw, 7rem);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-top: env(safe-area-inset-top, 0px);
+  --consent-offset: 0px;
 }
 
 @theme inline {
@@ -205,6 +206,14 @@ body {
 
 .product-detail-image {
   animation: product-detail-image 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.product-specs-summary {
+  list-style: none;
+}
+
+.product-specs-summary::-webkit-details-marker {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

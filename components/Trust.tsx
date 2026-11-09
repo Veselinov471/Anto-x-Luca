@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 export function Trust() {
   const t = useTranslations("trust");
-  const keys = ["italy", "support", "price", "policies"] as const;
+  const keys = ["italy", "support", "delivery", "policies"] as const;
 
   return (
     <section id="trust" className="section-pad section-y">

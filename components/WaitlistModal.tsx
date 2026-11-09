@@ -70,7 +70,7 @@ export function WaitlistModal({ open, productId, onClose }: Props) {
             >
               {t("modalTitle")}
             </h2>
-            <p className="mt-1 text-[0.85rem] leading-snug text-[var(--ink-muted)] sm:text-sm">
+            <p className="mt-1 hidden text-[0.85rem] leading-snug text-[var(--ink-muted)] sm:block sm:text-sm">
               {t("modalSubtitle")}
             </p>
           </div>
@@ -87,7 +87,7 @@ export function WaitlistModal({ open, productId, onClose }: Props) {
 
         <div className="overflow-y-auto px-4 py-3 sm:px-6 sm:py-5">
           <div className="mb-3 sm:mb-5">
-            <PreorderOffer prominent />
+            <PreorderOffer prominent compact />
           </div>
           <LeadForm
             key={productId ?? "any"}

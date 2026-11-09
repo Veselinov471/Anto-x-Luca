@@ -15,6 +15,16 @@ type Props = {
   onChange?: (consent: ConsentState) => void;
 };
 
+const CONSENT_OFFSET = "5.75rem";
+
+function setConsentOffset(on: boolean) {
+  const value = on
+    ? `calc(${CONSENT_OFFSET} + env(safe-area-inset-bottom, 0px))`
+    : "0px";
+  document.documentElement.style.setProperty("--consent-offset", value);
+  document.body.style.paddingBottom = on ? value : "";
+}
+
 export function ConsentBanner({ onChange }: Props) {
   const t = useTranslations("consent");
   const [visible, setVisible] = useState(false);
@@ -22,12 +32,9 @@ export function ConsentBanner({ onChange }: Props) {
   useEffect(() => {
     const shown = !hasAnsweredConsent();
     setVisible(shown);
-    if (shown) {
-      document.body.style.paddingBottom =
-        "calc(9.5rem + env(safe-area-inset-bottom, 0px))";
-    }
+    setConsentOffset(shown);
     return () => {
-      document.body.style.paddingBottom = "";
+      setConsentOffset(false);
     };
   }, []);
 
@@ -35,20 +42,27 @@ export function ConsentBanner({ onChange }: Props) {
     const next = writeConsent({ analytics, marketing });
     onChange?.(next);
     setVisible(false);
-    document.body.style.paddingBottom = "";
+    setConsentOffset(false);
   };
 
   if (!visible) return null;
 
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--line)] bg-[var(--bg-elevated)] px-4 pt-4 shadow-[var(--shadow-soft)] md:px-5 md:pt-5"
-      style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom, 0px))" }}
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--line)] bg-[var(--bg-elevated)] px-3 py-2.5 shadow-[var(--shadow-soft)] sm:px-4 sm:py-3 md:px-5"
+      style={{ paddingBottom: "max(0.6rem, env(safe-area-inset-bottom, 0px))" }}
       role="dialog"
       aria-label={t("aria")}
     >
-      <div className="mx-auto flex max-w-6xl flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-4">
-        <p className="max-w-2xl text-[0.85rem] leading-relaxed text-[var(--ink-muted)] sm:text-sm">
+      <div className="mx-auto flex max-w-6xl flex-col gap-2 sm:gap-3 md:flex-row md:items-center md:justify-between md:gap-4">
+        <p className="max-w-2xl text-[0.75rem] leading-snug text-[var(--ink-muted)] sm:hidden">
+          {t("shortBody")}{" "}
+          <Link href="/cookies" className="underline underline-offset-2">
+            {t("policy")}
+          </Link>
+          .
+        </p>
+        <p className="hidden max-w-2xl text-sm leading-relaxed text-[var(--ink-muted)] sm:block">
           {t("body")}{" "}
           <Link href="/cookies" className="underline underline-offset-2">
             {t("policy")}
@@ -58,14 +72,14 @@ export function ConsentBanner({ onChange }: Props) {
         <div className="grid grid-cols-2 gap-2 md:flex md:flex-wrap">
           <button
             type="button"
-            className="min-h-12 touch-manipulation border border-[var(--ink)] px-3 text-[0.85rem] sm:text-sm"
+            className="min-h-10 touch-manipulation border border-[var(--ink)] px-3 text-[0.8rem] sm:min-h-12 sm:text-sm"
             onClick={() => save(false, false)}
           >
             {t("necessary")}
           </button>
           <button
             type="button"
-            className="min-h-12 touch-manipulation bg-[var(--ink)] px-3 text-[0.85rem] text-[var(--bg-elevated)] sm:text-sm"
+            className="min-h-10 touch-manipulation bg-[var(--ink)] px-3 text-[0.8rem] text-[var(--bg-elevated)] sm:min-h-12 sm:text-sm"
             onClick={() => save(true, true)}
           >
             {t("acceptAll")}

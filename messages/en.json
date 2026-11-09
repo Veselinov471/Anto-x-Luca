@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Italian Touch — Italian women's handbags",
-    "description": "A small selection of handbags made in Italy. Clear prices and early access for Bulgaria.",
+    "description": "A small selection of handbags made in Italy. Early access for Bulgaria.",
     "ogDescription": "Italian elegance for every day. Join early access."
   },
   "nav": {
@@ -16,16 +16,19 @@
   "hero": {
     "eyebrow": "Made in Italy",
     "title": "Italian elegance for every day.",
-    "subtitle": "A small selection of handbags with clear prices. Join first — before the official launch.",
+    "subtitle": "Italian handbags. Join first — before the official launch.",
     "ctaBrowse": "Browse the collection",
     "ctaWaitlist": "Get early access",
+    "trustNoPay": "No payment now",
+    "trustCourier": "Speedy or Econt",
+    "trustCod": "Pay on pickup",
     "slideshowLabel": "Handbag gallery",
     "goToSlide": "Show image {index}"
   },
   "collection": {
     "eyebrow": "The collection",
     "title": "The first 10 models.",
-    "subtitle": "A small selection, each in several colours. Prices are clear. Choose the one you want to see first.",
+    "subtitle": "A small selection — each model in several colours. Choose the one you want to see first.",
     "madeInItaly": "Made in Italy",
     "cta": "Get early access",
     "colorsLabel": "Colours",
@@ -49,7 +52,12 @@
     "colours": "Colours",
     "colourCount": "{count} available",
     "cta": "Get early access for this model",
-    "hint": "No payment now — first 20 preorders get 20% off."
+    "hint": "No payment now — first 20 preorders get 20% off.",
+    "openGallery": "View full photo",
+    "closeGallery": "Close photo",
+    "prevImage": "Previous photo",
+    "nextImage": "Next photo",
+    "galleryCounter": "{current} / {total}"
   },
   "whyItaly": {
     "eyebrow": "Origin",
@@ -72,9 +80,9 @@
         "title": "Support in your language",
         "body": "Customer communication for shoppers in Bulgaria. Contact details will be completed before the campaign."
       },
-      "price": {
-        "title": "Prices without masks",
-        "body": "Prices are shown in euro. What you see here is the price we are talking about."
+      "delivery": {
+        "title": "Speedy or Econt",
+        "body": "Delivery in Bulgaria with Speedy or Econt. You can pay when you pick up the parcel."
       },
       "policies": {
         "title": "Honest policies",
@@ -96,12 +104,12 @@
         "a": "For each model we will describe the material, lining, and hardware once we have final confirmation. We prefer to wait for the facts rather than promise “premium leather” on guesswork."
       },
       "delivery": {
-        "q": "How long does delivery take?",
-        "a": "Delivery times for Bulgaria will be announced before the first orders. Right now we are collecting interest for early access — with no payment."
+        "q": "How does delivery work?",
+        "a": "We deliver in Bulgaria with Speedy or Econt — to an office or to your address. Exact times will be confirmed before the first orders."
       },
       "deliveryCost": {
         "q": "How much is shipping?",
-        "a": "We will state it clearly at checkout, together with the terms. We work with logistics for Bulgaria and will not hide fees in fine print."
+        "a": "We will state it clearly at checkout, together with the terms. Shipping is with Speedy or Econt."
       },
       "returns": {
         "q": "Can I return the bag?",
@@ -117,7 +125,7 @@
       },
       "payment": {
         "q": "How do I pay?",
-        "a": "You don’t — not yet. This is an early-access signup. Payment methods will be announced when we open orders."
+        "a": "When orders open, you can pay when you pick up the delivery with Speedy or Econt. Other payment options may be added later. Right now this is only an early-access signup — no payment yet."
       },
       "currency": {
         "q": "Are prices in euro or leva?",
@@ -156,7 +164,9 @@
     "offerAria": "Early preorder offer",
     "offerPercent": "−20%",
     "offerHeadline": "for the first 20 preorders",
-    "offerBody": "Join the list now. The first 20 who place a preorder get 20% off when orders open."
+    "offerBody": "Join the list now. The first 20 who place a preorder get 20% off when orders open.",
+    "moreModels": "Add more models",
+    "deliveryNote": "Speedy or Econt — pay when you pick up."
   },
   "footer": {
     "tagline": "Women’s handbags made in Italy. For women who want clean style without the noise.",
@@ -166,6 +176,7 @@
   "consent": {
     "aria": "Cookie settings",
     "body": "We use necessary cookies for the site to work. Analytics and marketing cookies (Google Analytics and Meta Pixel) load only if you agree.",
+    "shortBody": "Necessary cookies keep the site working. Analytics and ads only if you agree.",
     "policy": "Cookie Policy",
     "necessary": "Necessary only",
     "acceptAll": "Accept all"

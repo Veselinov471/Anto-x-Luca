@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { WaitlistModal } from "@/components/WaitlistModal";
+import { trackEvent } from "@/lib/analytics";
 
 const HERO_SLIDES = [
   {
@@ -123,7 +124,8 @@ export function Hero() {
         className="section-pad relative z-10 flex min-h-[100svh] flex-col justify-between"
         style={{
           paddingTop: "max(1.25rem, var(--safe-top))",
-          paddingBottom: "max(1.25rem, var(--safe-bottom))",
+          paddingBottom:
+            "max(1.25rem, var(--consent-offset), var(--safe-bottom))",
         }}
       >
         <div className="flex items-center justify-between gap-3 pt-1">
@@ -142,18 +144,18 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="reveal max-w-xl pb-2 pt-10 sm:pb-10 sm:pt-16 md:pb-20 md:pt-24">
-          <p className="mb-3 text-[0.65rem] uppercase tracking-[0.26em] text-white/70 sm:mb-4 sm:text-xs sm:tracking-[0.28em]">
+        <div className="reveal max-w-xl pb-2 pt-6 sm:pb-10 sm:pt-16 md:pb-20 md:pt-24">
+          <p className="mb-2 text-[0.65rem] uppercase tracking-[0.26em] text-white/70 sm:mb-4 sm:text-xs sm:tracking-[0.28em]">
             {t("eyebrow")}
           </p>
-          <h1 className="font-display text-[clamp(2.05rem,8.2vw,4.6rem)] leading-[1.06] text-balance">
+          <h1 className="font-display text-[clamp(1.9rem,8vw,4.6rem)] leading-[1.06] text-balance">
             {t("title")}
           </h1>
-          <p className="mt-4 max-w-md text-[0.95rem] leading-relaxed text-white/85 sm:mt-5 sm:text-base md:text-lg">
+          <p className="mt-3 max-w-md text-[0.92rem] leading-relaxed text-white/85 sm:mt-5 sm:text-base md:text-lg">
             {t("subtitle")}
           </p>
 
-          <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
+          <div className="mt-5 flex flex-col items-stretch gap-2.5 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
             <Button
               type="button"
               variant="primary"
@@ -164,19 +166,45 @@ export function Hero() {
             >
               {t("ctaWaitlist")}
             </Button>
-            <Button
+            <a
               href="#collection"
-              variant="secondary"
-              className="w-full border-white/70 text-white hover:bg-white hover:text-[var(--ink)] sm:w-auto"
-              ctaId="hero_browse"
-              location="hero"
+              className="inline-flex min-h-11 items-center justify-center text-sm text-white/85 underline decoration-white/35 underline-offset-4 touch-manipulation hover:text-white sm:hidden"
+              onClick={() =>
+                trackEvent("cta_click", {
+                  cta_id: "hero_browse",
+                  location: "hero",
+                })
+              }
             >
               {t("ctaBrowse")}
-            </Button>
+            </a>
+            <span className="hidden sm:contents">
+              <Button
+                href="#collection"
+                variant="secondary"
+                className="border-white/70 text-white hover:bg-white hover:text-[var(--ink)]"
+                ctaId="hero_browse"
+                location="hero"
+              >
+                {t("ctaBrowse")}
+              </Button>
+            </span>
           </div>
 
+          <p className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.65rem] uppercase tracking-[0.12em] text-white/75 sm:mt-4 sm:text-[0.7rem] sm:tracking-[0.14em]">
+            <span>{t("trustNoPay")}</span>
+            <span className="text-white/35" aria-hidden>
+              ·
+            </span>
+            <span>{t("trustCourier")}</span>
+            <span className="text-white/35" aria-hidden>
+              ·
+            </span>
+            <span>{t("trustCod")}</span>
+          </p>
+
           <div
-            className="mt-8 flex items-center gap-1 sm:mt-10"
+            className="mt-4 flex items-center gap-1 sm:mt-10"
             role="tablist"
             aria-label={t("slideshowLabel")}
           >

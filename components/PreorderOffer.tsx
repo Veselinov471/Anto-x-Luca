@@ -5,10 +5,32 @@ import { useTranslations } from "next-intl";
 type Props = {
   /** Stronger treatment for the modal (first thing they see). */
   prominent?: boolean;
+  /** One-line treatment so the form fields stay on the first screen. */
+  compact?: boolean;
 };
 
-export function PreorderOffer({ prominent = false }: Props) {
+export function PreorderOffer({ prominent = false, compact = false }: Props) {
   const t = useTranslations("waitlist");
+
+  if (compact) {
+    return (
+      <aside
+        className="relative overflow-hidden border border-[var(--accent)]/25 bg-[color-mix(in_srgb,var(--accent)_8%,var(--bg-elevated))] px-3 py-2"
+        aria-label={t("offerAria")}
+      >
+        <div
+          className="absolute inset-y-0 left-0 w-1 bg-[var(--accent)]"
+          aria-hidden
+        />
+        <p className="pl-3 text-[0.85rem] leading-snug text-[var(--ink)]">
+          <span className="font-display text-[1.35rem] leading-none tracking-tight text-[var(--accent)]">
+            {t("offerPercent")}
+          </span>{" "}
+          {t("offerHeadline")}
+        </p>
+      </aside>
+    );
+  }
 
   return (
     <aside
